@@ -1,0 +1,115 @@
+//-------------------------------------统计函数---------------------------------------------------------------//
+
+double SMaster::averageSMasterScore = 0.0;
+double SMaster::sumSMasterScore = 0.0;
+int SMaster::countSMasterNumber = 0;
+int SMaster::a[6] = { 0,0,0,0,0,0 };
+void SMaster::statisticalData()
+{
+    averageSMasterScore = 0.0;
+	sumSMasterScore = 0.0;
+	countSMasterNumber = 0;
+	for(int i=0;i<6;i++)
+		a[i] = 0;
+	if (shead->next == NULL) {
+		cerr << "链表中无数据";
+		system("pause");
+	}
+	SList *p = shead->next;
+	while (p != NULL) {
+		countSMasterNumber++;
+		sumSMasterScore += p->AcademicMaster->Sgrade;
+		if (p->AcademicMaster->Sgrade == 100.0) a[0]++;
+		else if (p->AcademicMaster->Sgrade >= 90.0&&p->AcademicMaster->Sgrade < 100.0) a[1]++;
+		else if (p->AcademicMaster->Sgrade >= 80 && p->AcademicMaster->Sgrade < 90) a[2]++;
+		else if (p->AcademicMaster->Sgrade >= 70 && p->AcademicMaster->Sgrade < 80) a[3]++;
+		else if (p->AcademicMaster->Sgrade >= 60 && p->AcademicMaster->Sgrade < 70) a[4]++;
+		else a[5]++;
+		p = p->next;
+
+	}
+	averageSMasterScore = (double)(sumSMasterScore / countSMasterNumber);
+	cout << "学术硕士总人数" << countSMasterNumber << endl;
+	cout << "平均分" << averageSMasterScore << endl;
+	cout << "成绩分布" << endl;
+	cout << "100分的人有：" << a[0] << "\t"<<"占百分比：" << ((double)a[0] / countSMasterNumber*100)<<"%" << endl;
+	cout << "90-100分的人有：" << a[1] << "\t"<<"占百分比：" << ((double)a[1] / countSMasterNumber*100)<<"%" << endl;
+	cout << "80-90分的人有：" << a[2] << "\t"<<"占百分比：" << ((double)a[2] / countSMasterNumber*100)<<"%" << endl;
+	cout << "70-80分的人有：" << a[3] << "\t"<<"占百分比:" << ((double)a[3] / countSMasterNumber*100)<<"%" << endl;
+	cout << "60-70分的人有：" << a[4] << "\t"<<"占百分比：" << ((double)a[4] / countSMasterNumber*100)<<"%" << endl;
+	cout << "60分以下的人有：" << a[5] << "\t"<<"占百分比：" << ((double)a[5] / countSMasterNumber*100)<<"%" << endl;
+	SList *q = shead->next;
+    while(q!=NULL){
+            for(q;q->next!=NULL;q=q->next){
+                if(q->AcademicMaster->Sgrade > q->next->AcademicMaster->Sgrade){
+                    SList *temp=q;
+                    q=q->next;
+                    q=temp;
+                }
+                cout << q->AcademicMaster->name << " " << q->AcademicMaster->stuNum << " " << q->AcademicMaster->sex << " " << q->AcademicMaster->kgrade
+                << " " << q->AcademicMaster->major << " " << q->AcademicMaster->age << " " << q->AcademicMaster->paper[0].name << " "
+                << q->AcademicMaster->paper[0].level<< " " << q->AcademicMaster->paper[1].name << " " <<q->AcademicMaster->paper[1].level << " "
+                << q->AcademicMaster->paper[2].name << " " << q->AcademicMaster->paper[2].level <<" "<< q->AcademicMaster->Sgrade<<endl;
+            }
+            cout << q->AcademicMaster->name << " " << q->AcademicMaster->stuNum << " " << q->AcademicMaster->sex << " " << q->AcademicMaster->kgrade
+                << " " << q->AcademicMaster->major << " " << q->AcademicMaster->age << " " << q->AcademicMaster->paper[0].name << " "
+                << q->AcademicMaster->paper[0].level<< " " << q->AcademicMaster->paper[1].name << " " << q->AcademicMaster->paper[1].level << " "
+                << q->AcademicMaster->paper[2].name << " " << q->AcademicMaster->paper[2].level << " "<<q->AcademicMaster->Sgrade<<endl;
+                system("pause");
+    }
+}
+
+double EMaster::averageEMasterScore = 0.0;
+double EMaster::sumEMasterScore = 0.0;
+int EMaster::countEMasterNumber = 0;
+int EMaster::a[6] = { 0,0,0,0,0,0 };
+void EMaster::statisticalData()
+{
+	averageEMasterScore = 0.0;
+	sumEMasterScore = 0.0;
+	countEMasterNumber = 0;
+	for (int i = 0; i < 6; i++)
+		a[i] = 0;
+	if (ehead->next == NULL) {
+		cerr << "链表中无数据";
+		system("pause");
+	}
+	EList *p = ehead->next;
+	while (p != NULL) {
+		countEMasterNumber++;
+		sumEMasterScore += p->EngineeringMaster->Sgrade;
+		if (p->EngineeringMaster->Sgrade == 100.0) a[0]++;
+		else if (p->EngineeringMaster->Sgrade >= 90.0&&p->EngineeringMaster->Sgrade < 100.0) a[1]++;
+		else if (p->EngineeringMaster->Sgrade >= 80 && p->EngineeringMaster->Sgrade < 90) a[2]++;
+		else if (p->EngineeringMaster->Sgrade >= 70 && p->EngineeringMaster->Sgrade < 80) a[3]++;
+		else if (p->EngineeringMaster->Sgrade >= 60 && p->EngineeringMaster->Sgrade < 70) a[4]++;
+		else a[5]++;
+		p = p->next;
+	}
+	averageEMasterScore = (double)(sumEMasterScore / countEMasterNumber);
+	cout << "学术硕士总人数" << countEMasterNumber << endl;
+	cout << "平均分" << averageEMasterScore << endl;
+	cout << "成绩分布" << endl;
+	cout << "100分的人有：" << a[0] << "/t占百分比：" << (double)(a[0] / countEMasterNumber) << endl;
+	cout << "90-100分的人有：" << a[1] << "/t占百分比：" << (double)(a[1] / countEMasterNumber) << endl;
+	cout << "80-90分的人有：" << a[2] << "/t占百分比：" << (double)(a[2] / countEMasterNumber) << endl;
+	cout << "70-80分的人有：" << a[3] << "/t占百分比:" << (double)(a[3] / countEMasterNumber) << endl;
+	cout << "60-70分的人有：" << a[4] << "/t占百分比：" << (double)(a[4] / countEMasterNumber) << endl;
+	cout << "60分以下的人有：" << a[5] << "/t占百分比：" << (double)(a[5] / countEMasterNumber) << endl;
+	EList *q = ehead->next;
+	while(q!=NULL){
+        for(q;q->next!=NULL;q=q->next){
+                if(q->EngineeringMaster->Sgrade > q->next->EngineeringMaster->Sgrade){
+                        EList *temp=q;
+                        q=q->next;
+                        q->next=temp;
+                }
+                cout << q->EngineeringMaster->name << " " <<q->EngineeringMaster->stuNum << " " << q->EngineeringMaster->sex << " "
+                << q->EngineeringMaster->kgrade << " " <<q->EngineeringMaster->area <<" "<< q->EngineeringMaster->age<< " "
+                << q->EngineeringMaster->project.name << " " << q->EngineeringMaster->project.level <<" "<<q->EngineeringMaster->Sgrade<< endl;
+        }
+        cout << q->EngineeringMaster->name << " " <<q->EngineeringMaster->stuNum << " " << q->EngineeringMaster->sex << " "
+            << q->EngineeringMaster->kgrade << " " <<q->EngineeringMaster->area <<" "<< q->EngineeringMaster->age<< " "
+            << q->EngineeringMaster->project.name << " " << q->EngineeringMaster->project.level <<" "<<q->EngineeringMaster->Sgrade<< endl;
+	}
+}

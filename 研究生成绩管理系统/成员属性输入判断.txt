@@ -1,0 +1,136 @@
+void SMaster::input() {
+	string _name, _sex, _stuNum, _major, papername[3];
+	int papernumber, _age, paperleve[3];
+	double _kgrade;
+	cout << "输入姓名:";
+	sjudge1: cin >> _name;
+    if(_name[0] == ' '){
+        cout << "请输入正确的姓名：";
+        goto sjudge1;
+    }
+	name = _name;
+	cout << "输入学号:";
+	sjudge2: cin >> _stuNum;
+    if(_stuNum[0] == ' '){
+        cout << "请输入正确的学号：";
+        goto sjudge2;
+    }
+	stuNum = _stuNum;
+	cout << "输入性别:";
+	sjudge3: cin >> _sex;
+    if(_sex != "man" && _sex != "woman"){
+        cout << "请输入正确的性别(man / woman)：";
+        goto sjudge3;
+    }
+	sex = _sex;
+	cout << "输入课程成绩:";
+	sjudge4: cin >> _kgrade;
+    if(_kgrade < 0 || _kgrade > 100){
+        cout << "请输入正确的课程成绩(0~100)：";
+        goto sjudge4;
+    }
+	kgrade = _kgrade;
+	cout << "输入专业:";
+	sjudge5: cin >> _major;
+    if(_major[0] == ' '){
+        cout << "请输入正确的专业：";
+        goto sjudge5;
+    }
+	major = _major;
+	cout << "输入年龄:";
+	sjudge6: cin >> _age;
+    if(_age <= 0){
+        cout << "请输入正确的年龄：";
+        goto sjudge6;
+    }
+	age = _age;
+	cout << "输入论文的个数:";
+	sjudge7: cin >> papernumber;
+    if(papernumber > 3 || papernumber < 0){
+        cout << "请输入正确的论文个数(0~3)：";
+        goto sjudge7;
+    }
+	for (int i = 0; i < papernumber; i++) {
+		cout << "第" << i + 1 << "篇论文" << endl;
+		cout << "名称:";
+		sjdge8: cin >> papername[i];
+        if(papername[i][0] == ' '){
+            cout << "请输入正确的论文名：";
+            goto sjdge8;
+        }
+		paper[i].name = papername[i];
+		cout << "等级:";
+		sjudge9: cin >> paperleve[i];
+        if(paperleve[i] > 3 || paperleve < 0){
+            cout << "请输入正确的论文等级(1~3)：";
+            goto sjudge9;
+        }
+		paper[i].level = paperleve[i];
+	}
+	getgrade();
+	getsum();
+}
+void EMaster::input() {
+	string _name, _sex, _area, projectname, _stuNum;
+	int _age;
+	char projectlevel;
+	double _kgrade;
+	cout << "输入姓名" << endl;
+	ejudge1: cin >> _name;
+    if(_name[0] == ' '){
+        cout << "请输入正确的姓名：";
+        goto ejudge1;
+    }
+	name = _name;
+	cout << "输入学号" << endl;
+	ejudge2: cin >> _stuNum;
+    if(_stuNum[0] == ' '){
+        cout << "请输入正确的学号：";
+        goto ejudge2;
+    }
+	stuNum = _stuNum;
+	cout << "输入性别" << endl;
+	ejudge3: cin >> _sex;
+    if(_sex != "man" && _sex != "woman"){
+        cout << "请输入正确的性别(man / woman)：";
+        goto ejudge3;
+    }
+	sex = _sex;
+	cout << "输入年龄" << endl;
+	ejudge4: cin >> _age;
+    if(_age < 0){
+        cout << "请输入正确的年龄：";
+        goto ejudge4;
+    }
+	age = _age;
+	cout << "输入领域" << endl;
+	ejudge5: cin >> _area;
+    if(_area[0] == ' '){
+        cout << "请输入正确的领域名：";
+        goto ejudge5;
+    }
+	area = _area;
+	cout << "输入课程成绩" << endl;
+	ejudge6: cin >> _kgrade;
+    if(_kgrade > 100 || _kgrade < 0){
+        cout << "请输入正确的课程成绩(0~100)：";
+        goto ejudge6;
+    }
+	kgrade = _kgrade;
+	cout << "输入项目名称" << endl;
+	ejudge7: cin >> projectname;
+    if(projectname[0] == ' '){
+        cout << "请输入正确的项目名称：";
+        goto ejudge7;
+    }
+	project.name = projectname;
+	cout << "输入项目级别" << endl;
+	ejudge8: cin >> projectlevel;
+    if(projectlevel != 'A' && projectlevel != 'B' && projectlevel != 'C'){
+        cout << "请输入正确的项目级别（A、B、C）：";
+        goto ejudge8;
+    }
+	project.level = projectlevel;
+	getgrade();
+	getsum();
+}

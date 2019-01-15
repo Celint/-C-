@@ -1,0 +1,68 @@
+构造重载输出函数的时候，不知道怎么输出论文的信息。
+解决：用三目运算符。
+修改的部分：
+1、
+double SMaster::getgrade()
+{
+	if(paper[0].name == "")
+		return 0.0;
+	int i;
+	for (i = 0; i < 3; i++)
+		grade1 += ((double)paper[i].level * 10 / 90) * 100;
+	return grade1;
+}
+2、
+void creat(SMaster s) {
+	s.input();
+	insert(&s);
+	s.charachter();
+	cout << s;
+}
+void create(EMaster e){
+	e.input();
+	insert(&e);
+	e.charachter();
+	cout << e;
+}
+3、
+EMaster::EMaster() {
+	stuNum = "无";
+	name = "无";
+	sex = "无";
+	age = 0;
+	kgrade = 0;
+	area = "无";
+	project.name = "无";
+	project.level = "无";
+	pEMaster = this;
+}
+SMaster::SMaster() {
+	stuNum = "无";
+	name = "无";
+	sex = "无";
+	age = 0;
+	kgrade = 0;
+	major = "无";
+	Sgrade = 0;
+	for (int i = 0; i < 3; i++) {
+		paper[i].name = "";		//这里不建议改成"无"
+		paper[i].level = 0;
+	}
+	pSMaster = this;
+}
+重载函数：
+ostream& operator << (ostream &os, SMaster &s){
+	os << s.stuNum << "\t" << s.name << "\t" << s.sex << "\t" << s.age << "\t" << s.kgrade << "\t\t" << s.major << "\t" << ((s.paper[0].name == "")?"无\t":s.paper[0].name) << " " << ((s.paper[0].level == 0)?' ':(char)(s.paper[0].level + 48)) << "\t" << ((s.paper[1].name == "")?"\t":s.paper[1].name) << " " << ((s.paper[1].level == 0)?' ':(char)(s.paper[1].level + 48)) << "\t" <<((s.paper[2].name == "")?"\t":s.paper[2].name) << " " << ((s.paper[2].level == 0)?' ':(char)(s.paper[2].level + 48)) << "\t" << s.getgrade() << "\t  " << s.getsum() << endl;
+	return os;
+}
+ostream& operator << (ostream &os, EMaster& e){
+	os << e.stuNum << "\t" << e.name << "\t" << e.sex << "\t" << e.age << "\t" << e.kgrade << "\t\t" << e.area << "\t" << (e.project.name == "无" ? "无\t\t":e.project.name) << "\t" << (e.project.level == "无" ? " " : e.project.level) << "\t\t" << e.getgrade() << "\t  " << e.getsum() << endl;
+	return os;
+}
+
+void SMaster::charachter(){
+	cout << "学术硕士\n学号\t姓名\t性别  年龄\t课程成绩\t主修\t论文以及论文水平\t\t\t\t  论文成绩  总成绩" << endl;
+}
+void EMaster::charachter(){
+	cout << "工程硕士\n学号\t学号\t性别  年龄\t课程成绩\t领域\t参与项目名称\t\t项目级别\t项目成绩  总成绩" << endl;
+}
